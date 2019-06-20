@@ -16,7 +16,9 @@ PPreStreamPreProcessor >> parseOn: aPPContext [
 	startPosition := aPPContext position.
 	preProcessedStream := (self preProcess: aPPContext stream).
 	"call the contained parser"
-	result := super parseOn: (PPContext new stream: preProcessedStream).
+	result := super parseOn: (PPContext new
+										initializeFor: self;
+										stream: preProcessedStream).
 	result isPetitFailure 
 		ifTrue: 
 			"restore stream position"
